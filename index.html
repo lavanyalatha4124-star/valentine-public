@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ffd6e8, #fff);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+        text-align: center;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        max-width: 350px;
+    }
+
+    h1 {
+        color: #e91e63;
+        margin-bottom: 30px;
+    }
+
+    .buttons {
+        position: relative;
+        height: 120px;
+    }
+
+    button {
+        padding: 12px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.2s;
+        margin: 10px;
+    }
+
+    #yesBtn {
+        background-color: #e91e63;
+        color: white;
+    }
+
+    #noBtn {
+        background-color: #f8bbd0;
+        color: #880e4f;
+        position: absolute;
+    }
+
+    .result {
+        display: none;
+    }
+
+    .result img {
+        width: 100%;
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+
+    .whatsapp {
+        background-color: #25D366;
+        color: white;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div id="question">
+        <h1>Will you be my Valentine? 💖</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <div class="result" id="result">
+        <h2>Good choice ❤️</h2>
+        <img src="https://i.imgflip.com/4/4t0m5.jpg" alt="Good choice meme">
+        <br>
+        <button class="whatsapp" onclick="shareWhatsApp()">Share on WhatsApp 💬</button>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const question = document.getElementById("question");
+    const result = document.getElementById("result");
+
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 80 - 40;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+        question.style.display = "none";
+        result.style.display = "block";
+    });
+
+    function shareWhatsApp() {
+        const text = encodeURIComponent(
+            "I said YES! 💖🥰 Best Valentine surprise ever!"
+        );
+        const url = `https://wa.me/?text=${text}`;
+        window.open(url, "_blank");
+    }
+</script>
+
+</body>
+</html>
