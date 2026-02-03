@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Be My Valentine ❤️</title>
+
 <style>
     body {
         margin: 0;
@@ -12,6 +13,7 @@
         align-items: center;
         background: linear-gradient(135deg, #ffd6e8, #fff);
         font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
     }
 
     .container {
@@ -20,7 +22,9 @@
         padding: 40px;
         border-radius: 20px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        max-width: 350px;
+        max-width: 360px;
+        position: relative;
+        z-index: 2;
     }
 
     h1 {
@@ -39,7 +43,6 @@
         border: none;
         border-radius: 30px;
         cursor: pointer;
-        transition: 0.2s;
         margin: 10px;
     }
 
@@ -58,19 +61,35 @@
         display: none;
     }
 
+    .result h2 {
+        color: #e91e63;
+        margin-bottom: 15px;
+    }
+
     .result img {
         width: 100%;
         border-radius: 15px;
-        margin-top: 20px;
     }
 
-    .whatsapp {
-        background-color: #25D366;
-        color: white;
-        margin-top: 20px;
+    /* Heart confetti */
+    .heart {
+        position: fixed;
+        top: -10px;
+        font-size: 20px;
+        animation: fall 4s linear infinite;
+        color: #e91e63;
+        z-index: 1;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh);
+            opacity: 0;
+        }
     }
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -83,10 +102,8 @@
     </div>
 
     <div class="result" id="result">
-        <h2>Good choice ❤️</h2>
-        <img src="https://i.imgflip.com/4/4t0m5.jpg" alt="Good choice meme">
-        <br>
-        <button class="whatsapp" onclick="shareWhatsApp()">Share on WhatsApp 💬</button>
+        <h2>I knew it! ❤️</h2>
+        <img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df" alt="Bouquet">
     </div>
 </div>
 
@@ -105,14 +122,22 @@
     yesBtn.addEventListener("click", () => {
         question.style.display = "none";
         result.style.display = "block";
+        startHearts();
     });
 
-    function shareWhatsApp() {
-        const text = encodeURIComponent(
-            "I said YES! 💖🥰 Best Valentine surprise ever!"
-        );
-        const url = `https://wa.me/?text=${text}`;
-        window.open(url, "_blank");
+    function startHearts() {
+        for (let i = 0; i < 30; i++) {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
     }
 </script>
 
